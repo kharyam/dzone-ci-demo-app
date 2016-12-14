@@ -1,3 +1,5 @@
 = CI Demo Application
 
-This is a simple Java Web Application used as a demo of a CI pipeline.
+This is a simple Java Web Application used as a demo of a Continuous Integration (CI) pipeline. A graphical representation of the pipeline is presented below.
+
+image:images/ci-pipeline-overview.png[]

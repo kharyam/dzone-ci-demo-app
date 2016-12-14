@@ -3,3 +3,20 @@
 This is a simple Java Web Application used as a demo of a Continuous Integration (CI) pipeline. A graphical representation of the pipeline is presented below.
 
 image:images/ci-pipeline-overview.png[]
+
+. Developer clones code from the authoritative Git repository managed by Gerrit
+. Developer pushes a code change into the pending changes repository managed by Gerrit
+. The team lead reviews the code change in pending changes repository
+. The team lead approves the code changes in the pending changes repository
+. The team lead submits the code changes into the authoritative Git repository
+. Gerrit triggers the Jenkins CI pipeline via a `change-merged` Git hook.
+. The `Checkout` stage of the pipeline is run
+. The `Checkout` stage clones the source code from the authoritative git repository
+. The `Build` stage performs a maven build of the code
+. The `Analyze` stage calls SonarQube to perform static code analysis
+. The `Archive` stage uploads the WAR file into the Nexus repository. It also archives unit test results within Jenkins
+. The `Deploy to Development` stage deploys the WAR from Nexus into the development servers *
+. Upon authorized approval the `Deploy to Test` stage deploys the WAR into the test servers *
+. Upon authorized approval the `Deploy to Production` stage deploys the WAR into the production servers *
+
+*Note that the last three steps are considered part of the Continuous Deployment (CD) process, however this can also be handled by the Jenkins pipeline. These steps are simply placeholders that can be implemented if CD is desired.
